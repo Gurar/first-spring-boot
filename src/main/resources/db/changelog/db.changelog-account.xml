@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-account-table" author="j.kozlovski">
+        <createTable tableName="ACCOUNT">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="true"></constraints>
+            </column>
+            <column name="account_number" type="bigint">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="balance" type="numeric(10,2)">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="load_account-data" author="j.kozlovski">
+        <loadData separator=";" tableName="ACCOUNT" file="account.csv" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>

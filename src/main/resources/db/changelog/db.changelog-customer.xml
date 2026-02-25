@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-customer-table" author="j.kozlovski">
+    <createTable tableName="CUSTOMER">
+        <column name="id" type="int" autoIncrement="true">
+            <constraints primaryKey="true" nullable="true"></constraints>
+        </column>
+        <column name="first_name" type="varchar(100)">
+            <constraints nullable="false"></constraints>
+        </column>
+        <column name="last_name" type="varchar(100)">
+            <constraints nullable="false"></constraints>
+        </column>
+        <column name="email" type="varchar(100)">
+            <constraints nullable="false"></constraints>
+        </column>
+    </createTable>
+    </changeSet>
+    <changeSet id="load_customer-data" author="j.kozlovski">
+        <loadData separator=";" tableName="CUSTOMER" file="customer.csv" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,19 @@
+package lt.viko.eif.jkozlovski.first.spring.boot.model;
+
+import jakarta.persistence.*;
+
+@MappedSuperclass
+public class BaseEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}
