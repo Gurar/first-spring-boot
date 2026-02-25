@@ -1,2 +1,2 @@
-Spring Framework 4.03 version
-Java jdk 25
+#Spring Framework 4.03
+#Java jdk 25
