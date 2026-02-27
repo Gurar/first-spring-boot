@@ -33,4 +33,13 @@ private double balance;
     public void setAccountNumber(BigInteger accountNumber) {
         this.accountNumber = accountNumber;
     }
+
+    @Override
+    public String toString() {
+        return "\n\t\tAccount:" +
+                "\n\t\tid=" + getId() +
+                "\n\t\taccountNumber=" + accountNumber +
+                "\n\t\tbalance=" + balance;
+    }
 }
+

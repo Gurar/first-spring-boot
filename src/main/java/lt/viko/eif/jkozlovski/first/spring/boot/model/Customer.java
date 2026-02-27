@@ -2,6 +2,8 @@ package lt.viko.eif.jkozlovski.first.spring.boot.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "customer")
 public class Customer extends BaseEntity {
@@ -9,10 +11,22 @@ public class Customer extends BaseEntity {
     private String lastName;
     private String email;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Customer_Account",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id")
+    )
+    private List<Account> accounts;
+
     public Customer() {
     }
 
-
+    public Customer(String firstName, String lastName, String email) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -38,4 +52,22 @@ public class Customer extends BaseEntity {
         this.email = email;
     }
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer:" +
+                "\n\tid=" + getId() +
+                "\n\tfirstName=" + firstName +
+                "\n\tlastName=" + lastName +
+                "\n\temail=" + email +
+                "\n\t\tcustomer=" + accounts;
+
+    }
 }
