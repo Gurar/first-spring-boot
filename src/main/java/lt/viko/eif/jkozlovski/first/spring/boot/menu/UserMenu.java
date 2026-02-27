@@ -1,8 +1,18 @@
 package lt.viko.eif.jkozlovski.first.spring.boot.menu;
 
+import lt.viko.eif.jkozlovski.first.spring.boot.db.CustomerRepository;
+import lt.viko.eif.jkozlovski.first.spring.boot.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class UserMenu {
+    @Autowired
+    private CustomerRepository customerRepository;
+    private static List<Customer> customers;
 
     public UserMenu() {
     }
@@ -23,7 +33,23 @@ public class UserMenu {
       return input.nextInt();
     }
 
-    private void shownMenu() {
+    public void shownMenu() {
         Scanner input = new Scanner(System.in);
+        int userChoise;
+        do {
+            userChoise = displayMenu(input);
+            switch (userChoise){
+                case 1:
+                    customers = customerRepository.findAll();
+                    for (Customer customer: customers) {
+                        System.out.println(customer);
+                    }
+                    break;
+                case 6:
+                    System.out.println("Thanks you and goodbay");
+                    System.exit(0);
+                    break;
+            }
+        }while (userChoise != 6);
     }
 }
