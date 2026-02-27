@@ -2,6 +2,8 @@ package lt.viko.eif.jkozlovski.first.spring.boot.menu;
 
 import lt.viko.eif.jkozlovski.first.spring.boot.db.CustomerRepository;
 import lt.viko.eif.jkozlovski.first.spring.boot.model.Customer;
+import lt.viko.eif.jkozlovski.first.spring.boot.model.Customers;
+import lt.viko.eif.jkozlovski.first.spring.boot.service.XMLTransformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +11,13 @@ import java.util.List;
 import java.util.Scanner;
 
 @Component
+
 public class UserMenu {
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private XMLTransformationService xmlServices;
     private static List<Customer> customers;
 
     public UserMenu() {
@@ -29,6 +35,7 @@ public class UserMenu {
         System.out.println(" Make a selection ");
         System.out.println("-------------------");
         System.out.printf("| 1) + %10s \n", "Fetch data from DB");
+        System.out.printf("| 2) + %10s \n", "Transform to XMl");
         System.out.printf("| 6) + Quit %7s \n", "");
       return input.nextInt();
     }
@@ -44,6 +51,10 @@ public class UserMenu {
                     for (Customer customer: customers) {
                         System.out.println(customer);
                     }
+                    break;
+                case 2:
+                    Customers customerObject = new Customers(customers);
+                    xmlServices.transformToXML(customerObject);
                     break;
                 case 6:
                     System.out.println("Thanks you and goodbay");
